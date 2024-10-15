@@ -93,6 +93,7 @@ const totalRows = 10;
 const timeLimit = 180; // 3 minutes in seconds
 let foundWords = [];
 let errorWords = [];
+let currentWord = '';
 let timerInterval;
 
 document.getElementById('startButton').addEventListener('click', startGame);
@@ -119,6 +120,7 @@ function startGame() {
 function resetGame() {
     foundWords = [];
     errorWords = [];
+    currentWord = '';
     document.getElementById('gridContainer').innerHTML = '';
     document.getElementById('foundWords').innerHTML = 'Palabras encontradas: 0';
     document.getElementById('errors').innerHTML = 'Errores: 0';
@@ -142,9 +144,9 @@ function loadNewWords() {
         gridContainer.appendChild(wordDiv);
     });
 
-    // Seleccionar 5 palabras al azar de las 40 palabras del tablero para buscarlas
-    const wordsToFind = getRandomWordsFromGrid(gridWords, 1);
-    document.getElementById('wordList').innerHTML = wordsToFind.join(', ');
+    // Seleccionar 1 palabra al azar de las 40 palabras del tablero para buscarla
+    currentWord = getRandomWordFromGrid(gridWords);
+    document.getElementById('wordList').innerHTML = `Buscar: ${currentWord}`;
 }
 
 function getRandomGridWords() {
@@ -153,24 +155,25 @@ function getRandomGridWords() {
     return shuffled.slice(0, totalColumns * totalRows);
 }
 
-function getRandomWordsFromGrid(gridWords, count) {
-    // Obtener aleatoriamente 5 palabras de las 40 generadas para el tablero
+function getRandomWordFromGrid(gridWords) {
+    // Obtener aleatoriamente 1 palabra del tablero
     const shuffled = gridWords.sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, count);
+    return shuffled[0]; // Solo devolver la primera palabra aleatoria
 }
 
 function checkWord(word) {
-    const targetWords = document.getElementById('wordList').innerText.split(', ');
-    if (targetWords.includes(word)) {
-        if (!foundWords.includes(word)) {
-            foundWords.push(word);
+    if (word === currentWord) {
+        if (!foundWords.includes(currentWord)) {
+            foundWords.push(currentWord);
             updateFoundWordsDisplay();
             document.querySelectorAll('.word').forEach(el => {
-                if (el.innerText === word) el.classList.add('found');
+                if (el.innerText === currentWord) el.classList.add('found');
             });
-            if (foundWords.length === 1) {
-                setTimeout(loadNewWords, 1000); // Cambiar palabras tras acertar todas
-            }
+
+            // Cargar nuevas palabras después de un segundo si se han encontrado palabras
+            setTimeout(() => {
+                loadNewWords();
+            }, 1000);
         }
     } else {
         if (!errorWords.includes(word)) {
