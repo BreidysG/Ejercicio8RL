@@ -120,6 +120,10 @@ button:hover {
     background-color: #005f73; /* Color de fondo al pasar el mouse */
 }
 
+#pFinal {
+    font-size: 16px;
+}
+
 .hidden {
     display: none;
 }
