@@ -99,12 +99,10 @@ let timerInterval;
 document.getElementById('startButton').addEventListener('click', startGame);
 
 function startGame() {
-    // Oculta los párrafos y muestra el juego
     document.querySelectorAll('p').forEach(paragraph => {
         paragraph.style.display = 'none'; // Oculta los párrafos
     });
     
-    // Muestra la lista de palabras, contadores y tablero
     document.getElementById('timer').style.display = 'block';
     document.getElementById('wordList').style.display = 'block';
     document.getElementById('foundWords').style.display = 'block';
@@ -130,7 +128,7 @@ function resetGame() {
 }
 
 function loadNewWords() {
-    // Obtener 40 palabras para el tablero
+    // Obtener 40 palabras únicas para el tablero
     const gridWords = getRandomGridWords();
     const gridContainer = document.getElementById('gridContainer');
     gridContainer.innerHTML = ''; // Limpiar palabras anteriores
@@ -152,7 +150,7 @@ function loadNewWords() {
 function getRandomGridWords() {
     // Obtener una lista aleatoria de 40 palabras para el tablero
     const shuffled = wordsToFind.sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, totalColumns * totalRows);
+    return [...new Set(shuffled.slice(0, totalColumns * totalRows))]; // Asegurarse de que no haya duplicados
 }
 
 function getRandomWordFromGrid(gridWords) {
@@ -162,27 +160,24 @@ function getRandomWordFromGrid(gridWords) {
 }
 
 function checkWord(word) {
-    if (word === currentWord) {
-        if (!foundWords.includes(currentWord)) {
-            foundWords.push(currentWord);
-            updateFoundWordsDisplay();
-            document.querySelectorAll('.word').forEach(el => {
-                if (el.innerText === currentWord) el.classList.add('found');
-            });
+    // Comprobar si la palabra seleccionada es la correcta
+    if (word === currentWord && !foundWords.includes(currentWord)) {
+        foundWords.push(currentWord);
+        updateFoundWordsDisplay();
+        document.querySelectorAll('.word').forEach(el => {
+            if (el.innerText === currentWord) el.classList.add('found');
+        });
 
-            // Cargar nuevas palabras después de un segundo si se han encontrado palabras
-            setTimeout(() => {
-                loadNewWords();
-            }, 1000);
-        }
-    } else {
-        if (!errorWords.includes(word)) {
-            errorWords.push(word);
-            document.querySelectorAll('.word').forEach(el => {
-                if (el.innerText === word) el.classList.add('error');
-            });
-            updateErrorsDisplay();
-        }
+        // Cargar nuevas palabras después de un segundo si se han encontrado palabras
+        setTimeout(() => {
+            loadNewWords();
+        }, 1000);
+    } else if (word !== currentWord && !errorWords.includes(word)) {
+        errorWords.push(word);
+        document.querySelectorAll('.word').forEach(el => {
+            if (el.innerText === word) el.classList.add('error');
+        });
+        updateErrorsDisplay();
     }
 }
 
@@ -228,5 +223,4 @@ function showFinalResults() {
     
     document.getElementById('foundWords').innerHTML = finalMessage;
     document.getElementById('errors').innerHTML = '';
-
 }
