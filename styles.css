@@ -3,6 +3,8 @@ body {
     background-color: #f4f4f4;
     margin: 0;
     padding: 20px;
+    background-image: url(/1.png);
+    background-size: cover;
 }
 
 #container {
@@ -42,7 +44,6 @@ p {
     margin: 20px 0;
     font-weight: bold;
 }
-
 
 #gridContainer {
     display: grid;
