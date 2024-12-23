@@ -8,6 +8,9 @@ body {
 }
 
 #container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     max-width: 800px;
     margin: auto;
     text-align: center;
@@ -123,7 +126,7 @@ button:hover {
 /* Estilos responsivos */
 @media (max-width: 768px) {
     #gridContainer {
-        grid-template-columns: repeat(5, 1fr); /* Dos columnas en pantallas más pequeñas */
+        transform: scale(0.6);
     }
 
     h1 {
@@ -145,7 +148,7 @@ button:hover {
 
 @media (max-width: 480px) {
     #gridContainer {
-        grid-template-columns: repeat(2, 0.5fr) ; /* Una sola columna en pantallas pequeñas */
+        transform: scale(0.5);
     }
 
     h1 {
