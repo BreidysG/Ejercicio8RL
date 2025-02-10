@@ -14,7 +14,6 @@ body {
     max-width: 800px;
     margin: auto;
     text-align: center;
-    gap: 10px; /* Espacio uniforme entre elementos */
     transform: scale(0.7); /* Escala al 90% */
 }
 
@@ -140,6 +139,9 @@ p {
 }
 /* Estilos responsivos */
 @media (max-width: 768px) {
+    #container {
+        transform: scale(0.5); /* Escala al 90% */
+    }
     #gridContainer {
         transform: scale(0.6);
         
@@ -178,4 +180,8 @@ p {
     #timer {
         font-size: 1.2em; /* Tamaño de fuente aún menor para el temporizador */
     }
+    #container {
+        transform: scale(0.5); /* Escala al 90% */
+    }
+    
 }
