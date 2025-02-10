@@ -15,6 +15,7 @@ body {
     margin: auto;
     text-align: center;
     gap: 10px; /* Espacio uniforme entre elementos */
+    transform: scale(0.7); /* Escala al 90% */
 }
 
 #timer {
@@ -163,8 +164,6 @@ p {
 
 @media (max-width: 480px) {
     #gridContainer {
-        transform: scale(0.5);
-        position: absolute;
         top: 10%;
     }
 
