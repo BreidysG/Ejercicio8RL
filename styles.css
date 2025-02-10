@@ -14,6 +14,7 @@ body {
     max-width: 800px;
     margin: auto;
     text-align: center;
+    gap: 10px; /* Espacio uniforme entre elementos */
 }
 
 #timer {
@@ -81,7 +82,9 @@ p {
     display: flex;
     justify-content: space-evenly;
 }
-
+#resultados > div {
+    margin: 3px 0;
+}
 #foundWords, #errors {
     margin-top: 20px;
     text-align: left;
@@ -105,9 +108,9 @@ p {
 }
 
 button {
-    padding: 10px 20px;
+    padding: 5px 15px;
     font-size: 1.2em; /* Tamaño de fuente mayor */
-    margin-top: 20px;
+    margin-top: 10px;
     background-color: #008CBA; /* Color de fondo del botón */
     color: white; /* Color de texto del botón */
     border: none; /* Sin borde */
@@ -123,10 +126,22 @@ button:hover {
 .hidden {
     display: none !important; 
 }
+
+#timer,
+#title,
+#wordList,
+#gridContainer,
+#resultados {
+    margin: 5px 0; /* Reduce espacio vertical */
+}
+p {
+    margin: 5px 0; /* Reduce espacio vertical entre párrafos */
+}
 /* Estilos responsivos */
 @media (max-width: 768px) {
     #gridContainer {
         transform: scale(0.6);
+        
     }
 
     h1 {
@@ -149,6 +164,8 @@ button:hover {
 @media (max-width: 480px) {
     #gridContainer {
         transform: scale(0.5);
+        position: absolute;
+        top: 10%;
     }
 
     h1 {
